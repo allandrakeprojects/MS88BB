@@ -618,6 +618,12 @@ namespace Odds_Grabber___ms88bb
                     };
                 }));
             }
+            else if (e.Address.ToString().Contains("forbidden"))
+            {
+                SendABCTeam("Please setup first China VPN to the installed PC.");
+                __is_close = false;
+                Environment.Exit(0);
+            }
         }
 
         // ----- Functions
@@ -773,6 +779,10 @@ namespace Odds_Grabber___ms88bb
                         else
                         {
                             MatchStatus = "R";
+                        }
+                        if (MatchTimeHalf_Detect == "HT")
+                        {
+                            MatchTimeMinute = "0";
                         }
                         // KickOffDateTime && StatementDate
                         string KickOffDateTime_Detect = _jo.SelectToken("[0][" + i + "][5]").ToString();
