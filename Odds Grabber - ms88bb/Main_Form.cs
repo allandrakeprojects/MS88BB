@@ -580,7 +580,7 @@ namespace Odds_Grabber___ms88bb
 
             settings.CachePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\CEF";
             Cef.Initialize(settings);
-            chromeBrowser = new ChromiumWebBrowser("https://nss.ms88bb.com/sports.aspx");
+            chromeBrowser = new ChromiumWebBrowser("www.ms88bb.com");
             panel_cefsharp.Controls.Add(chromeBrowser);
             chromeBrowser.AddressChanged += ChromiumBrowserAddressChanged;
         }
@@ -594,6 +594,11 @@ namespace Odds_Grabber___ms88bb
                 //panel3.Visible = true;
                 panel4.Visible = true;
             }));
+
+            if (e.Address.ToString().Contains("www.ms88bb.com/Main/Home.aspx"))
+            {
+                chromeBrowser.Load("https://nss.ms88bb.com/sports.aspx");
+            }
 
             if (e.Address.ToString().Equals("https://nss.ms88bb.com/sports.aspx"))
             {
