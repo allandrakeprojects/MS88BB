@@ -612,11 +612,13 @@ namespace Odds_Grabber___ms88bb
             Cef.Initialize(settings);
             chromeBrowser = new ChromiumWebBrowser("www.ms88bb.com");
             panel_cefsharp.Controls.Add(chromeBrowser);
-            chromeBrowser.AddressChanged += ChromiumBrowserAddressChanged;
+            chromeBrowser.AddressChanged += ChromiumBrowserAddressChangedAsync;
         }
 
+        private int __vpn_count = 0;
+
         // CefSharp Address Changed
-        private void ChromiumBrowserAddressChanged(object sender, AddressChangedEventArgs e)
+        private async void ChromiumBrowserAddressChangedAsync(object sender, AddressChangedEventArgs e)
         {
             __url = e.Address.ToString();
             Invoke(new Action(() =>
@@ -632,6 +634,8 @@ namespace Odds_Grabber___ms88bb
 
             if (e.Address.ToString().Equals("https://nss.ms88bb.com/sports.aspx"))
             {
+                __vpn_count = 0;
+
                 Invoke(new Action(() =>
                 {
                     chromeBrowser.FrameLoadEnd += (sender_, args) =>
@@ -655,10 +659,21 @@ namespace Odds_Grabber___ms88bb
             }
             else if (e.Address.ToString().Contains("forbidden"))
             {
-                SendABCTeam("Please setup first China VPN to the installed PC.");
-                MessageBox.Show("Please setup first VPN to this PC.", __app__website_name, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                __is_close = false;
-                Environment.Exit(0);
+                __vpn_count++;
+
+                if (__vpn_count != 5)
+                {
+                    await ___TaskWait_Handler(15);
+                    chromeBrowser.Load("www.ms88bb.com");
+                    return;
+                }
+                else
+                {
+                    SendABCTeam("Please setup first China VPN to the installed PC.");
+                    MessageBox.Show("Please setup first VPN to this PC.", __app__website_name, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    __is_close = false;
+                    Environment.Exit(0);
+                }
             }
         }
 
