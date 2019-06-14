@@ -125,5 +125,65 @@ namespace Odds_Grabber___ms88bb.Properties {
                 this["______is_send_telegram"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("www.ms88bb.com")]
+        public string ______root_url {
+            get {
+                return ((string)(this["______root_url"]));
+            }
+            set {
+                this["______root_url"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("www.ms88bb.com/Main/Home.aspx")]
+        public string ______root_url_equals {
+            get {
+                return ((string)(this["______root_url_equals"]));
+            }
+            set {
+                this["______root_url_equals"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nss.ms88bb.com/sports.aspx")]
+        public string ______root_url_login {
+            get {
+                return ((string)(this["______root_url_login"]));
+            }
+            set {
+                this["______root_url_login"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nss.ms88bb.com/nss/Main2Data.aspx")]
+        public string ______MS88BB_running {
+            get {
+                return ((string)(this["______MS88BB_running"]));
+            }
+            set {
+                this["______MS88BB_running"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nss.ms88bb.com/nss/Main2Data.aspx")]
+        public string ______MS88BB_not_running {
+            get {
+                return ((string)(this["______MS88BB_not_running"]));
+            }
+            set {
+                this["______MS88BB_not_running"] = value;
+            }
+        }
     }
 }

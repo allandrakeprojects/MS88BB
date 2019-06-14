@@ -51,5 +51,20 @@
     <Setting Name="______is_send_telegram" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="______root_url" Type="System.String" Scope="User">
+      <Value Profile="(Default)">www.ms88bb.com</Value>
+    </Setting>
+    <Setting Name="______root_url_equals" Type="System.String" Scope="User">
+      <Value Profile="(Default)">www.ms88bb.com/Main/Home.aspx</Value>
+    </Setting>
+    <Setting Name="______root_url_login" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://nss.ms88bb.com/sports.aspx</Value>
+    </Setting>
+    <Setting Name="______MS88BB_running" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://nss.ms88bb.com/nss/Main2Data.aspx</Value>
+    </Setting>
+    <Setting Name="______MS88BB_not_running" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://nss.ms88bb.com/nss/Main2Data.aspx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

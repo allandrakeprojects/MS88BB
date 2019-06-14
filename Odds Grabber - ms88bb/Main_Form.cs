@@ -37,6 +37,15 @@ namespace Odds_Grabber___ms88bb
         private string __running_22 = "";
         private string __app_detect_running = "MS88BB";
         private string __local_ip = "";
+        // Settings
+        private string __root_url = "";
+        private string __root_url_equals = "";
+        private string __root_url_login = "";
+        private string __MS88BB_running = "";
+        private string __MS88BB_not_running = "";
+        private string __username = "";
+        private string __password = "";
+        // End of Settings
         private int __send = 0;
         private int __r = 178;
         private int __g = 147;
@@ -145,6 +154,16 @@ namespace Odds_Grabber___ms88bb
         public Main_Form()
         {
             InitializeComponent();
+
+            // Settings
+            __root_url = Properties.Settings.Default.______root_url.ToString().Replace("amp;", "");
+            __root_url_equals = Properties.Settings.Default.______root_url_equals.ToString().Replace("amp;", "");
+            __root_url_login = Properties.Settings.Default.______root_url_login.ToString().Replace("amp;", "");
+            __MS88BB_running = Properties.Settings.Default.______MS88BB_running.ToString().Replace("amp;", "");
+            __MS88BB_not_running = Properties.Settings.Default.______MS88BB_not_running.ToString().Replace("amp;", "");
+
+            //MessageBox.Show(Properties.Settings.Default.______is_send_telegram.ToString() + "\n" + __root_url + "\n" + __root_url_equals + "\n" + __root_url_login + "\n" + __MS88BB_running + "\n" + __MS88BB_not_running + "\n" + __username + "\n" + __password);
+            // End of Settings
 
             timer_landing.Start();
         }
@@ -610,7 +629,7 @@ namespace Odds_Grabber___ms88bb
 
             settings.CachePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\CEF";
             Cef.Initialize(settings);
-            chromeBrowser = new ChromiumWebBrowser("www.ms88bb.com");
+            chromeBrowser = new ChromiumWebBrowser(__root_url);
             panel_cefsharp.Controls.Add(chromeBrowser);
             chromeBrowser.AddressChanged += ChromiumBrowserAddressChangedAsync;
         }
@@ -627,12 +646,12 @@ namespace Odds_Grabber___ms88bb
                 panel4.Visible = true;
             }));
 
-            if (e.Address.ToString().Contains("www.ms88bb.com/Main/Home.aspx"))
+            if (e.Address.ToString().Contains(__root_url_equals))
             {
-                chromeBrowser.Load("https://nss.ms88bb.com/sports.aspx");
+                chromeBrowser.Load(__root_url_login);
             }
 
-            if (e.Address.ToString().Equals("https://nss.ms88bb.com/sports.aspx"))
+            if (e.Address.ToString().Equals(__root_url_login))
             {
                 __vpn_count = 0;
 
@@ -664,7 +683,7 @@ namespace Odds_Grabber___ms88bb
                 if (__vpn_count != 5)
                 {
                     await ___TaskWait_Handler(15);
-                    chromeBrowser.Load("www.ms88bb.com");
+                    chromeBrowser.Load(__root_url);
                     return;
                 }
                 else
@@ -715,7 +734,7 @@ namespace Odds_Grabber___ms88bb
                     {"verpartLA", ""}
                 };
 
-                byte[] result = await wc.UploadValuesTaskAsync("https://nss.ms88bb.com/nss/Main2Data.aspx", "POST", reqparm);
+                byte[] result = await wc.UploadValuesTaskAsync(__MS88BB_running, "POST", reqparm);
                 string responsebody = Encoding.UTF8.GetString(result).Replace("<script type=\"text/javascript\">var d=[];d=", "").Replace(";parent.main.rdrLvScr.lfull(d);</script>", "");
                 var deserializeObject = JsonConvert.DeserializeObject(responsebody);
                 JArray _jo = JArray.Parse(deserializeObject.ToString());
@@ -1233,7 +1252,7 @@ namespace Odds_Grabber___ms88bb
                     {"prevParams", "undefined"}
                 };
 
-                byte[] result = await wc.UploadValuesTaskAsync("https://nss.ms88bb.com/nss/Main2Data.aspx", "POST", reqparm);
+                byte[] result = await wc.UploadValuesTaskAsync(__MS88BB_not_running, "POST", reqparm);
                 string responsebody = Encoding.UTF8.GetString(result).Replace(";parent.main.rdrScr.full(d);</script>", "");
                 var pattern = @"Date\((.*?)\)";
                 Match responsebody_detect = Regex.Match(responsebody, pattern, RegexOptions.IgnoreCase);
@@ -1782,6 +1801,13 @@ namespace Odds_Grabber___ms88bb
                     return "0";
                 }
             }
+        }
+
+        // added settings
+        private void panel2_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Form_Settings form_settings = new Form_Settings();
+            form_settings.ShowDialog();
         }
     }
 }
